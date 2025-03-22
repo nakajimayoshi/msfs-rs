@@ -118,13 +118,13 @@ impl<'a> SimConnect<'a> {
                 */
                 for (datum_name, units_type, epsilon, datatype) in T::DEFINITIONS {
                     let datum_name = std::ffi::CString::new(*datum_name).unwrap();
-                    let units_type = std::ffi::CString::new(*units_type).unwrap();
+                    
                     unsafe {
                         map_err(sys::SimConnect_AddToDataDefinition(
                             handle,
                             define_id,
                             datum_name.as_ptr(),
-                            units_type.as_ptr(),
+                            units_type.as_ptr() as *const i8,
                             *datatype,
                             *epsilon,
                             sys::SIMCONNECT_UNUSED,
@@ -204,13 +204,13 @@ impl<'a> SimConnect<'a> {
         let define_id = self.get_define_id::<T>()?;
         unsafe {
             map_err(sys::SimConnect_SetDataOnSimObject(
-                self.handle,
-                define_id,
-                object_id,
-                0,
-                0,
-                std::mem::size_of_val(data) as sys::DWORD,
-                data as *const T as *mut std::ffi::c_void,
+            self.handle,
+            define_id,
+            object_id,
+            0,
+            0,
+            std::mem::size_of_val(data) as sys::DWORD,
+            data as *const T as *mut std::ffi::c_void,
             ))
         }
     }
