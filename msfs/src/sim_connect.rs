@@ -247,15 +247,15 @@ impl<'a> SimConnect<'a> {
 
         unsafe {
             map_err(sys::SimConnect_RequestDataOnSimObject(
-                self.handle,
-                request_id,
-                define_id,
-                object_id,
-                period as sys::SIMCONNECT_PERIOD,
-                sys::SIMCONNECT_DATA_REQUEST_FLAG_CHANGED,
-                0,
-                0,
-                0,
+            self.handle,
+            request_id,
+            define_id,
+            object_id,
+            period as sys::SIMCONNECT_PERIOD,
+            sys::SIMCONNECT_DATA_REQUEST_FLAG_CHANGED,
+            0,
+            0,
+            0,
             ))
         }
     }
