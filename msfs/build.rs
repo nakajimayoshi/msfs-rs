@@ -42,6 +42,7 @@ fn main() {
             .blocklist_function("nvgStrokePaint")
             .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
             .rustified_enum("SIMCONNECT_EXCEPTION")
+            .layout_tests(false)
             .impl_debug(false);
 
         if wasm {
