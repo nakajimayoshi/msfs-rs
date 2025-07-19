@@ -3,8 +3,9 @@ use proc_macro::TokenStream;
 use quote::{format_ident, quote};
 use std::collections::HashMap;
 use syn::{
+    Expr, Ident, ItemFn, ItemStruct, Lit, Meta, Token, Type,
     parse::{Parse, ParseStream, Result as SynResult},
-    parse_macro_input, Expr, Ident, ItemFn, ItemStruct, Lit, Meta, Token, Type,
+    parse_macro_input,
 };
 
 /// Declare a standalone module.

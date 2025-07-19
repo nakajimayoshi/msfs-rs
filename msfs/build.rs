@@ -5,7 +5,6 @@ fn main() {
 
     // build nanovg wrapper
     if wasm {
-
         unsafe {
             std::env::set_var("AR", "llvm-ar");
         }
