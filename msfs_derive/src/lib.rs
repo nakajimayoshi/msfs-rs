@@ -18,7 +18,6 @@ use syn::{
 /// }
 /// ```
 #[proc_macro_attribute]
-#[allow(unsafe_code)]
 pub fn standalone_module(_args: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemFn);
 
@@ -97,7 +96,6 @@ impl Parse for GaugeArgs {
 /// #[msfs::gauge(name=FOO)]
 /// async fn xyz(...) {}
 #[proc_macro_attribute]
-#[allow(unsafe_code)]
 pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as GaugeArgs);
     let input = parse_macro_input!(item as ItemFn);
@@ -134,9 +132,7 @@ pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
             service_id: std::os::raw::c_int,
             p_data: *mut std::os::raw::c_void,
         ) -> bool {
-            unsafe {
-                ::msfs::wrap_executor(&raw mut #executor_name, |e| e.handle_gauge(ctx, service_id, p_data))
-            }
+            ::msfs::wrap_executor(&raw mut #executor_name, |e| e.handle_gauge(ctx, service_id, p_data))
         }
 
         #[doc(hidden)]
@@ -146,9 +142,7 @@ pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
             fy: std::os::raw::c_float,
             i_flags: std::os::raw::c_uint,
         ) {
-            unsafe {
-                ::msfs::wrap_executor(&raw mut #executor_name, |e| e.handle_mouse(fx, fy, i_flags));
-            }
+               ::msfs::wrap_executor(&raw mut #executor_name, |e| e.handle_mouse(fx, fy, i_flags));
          }
     };
 
