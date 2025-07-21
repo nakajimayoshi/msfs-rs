@@ -126,6 +126,7 @@ pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
         };
 
         #[doc(hidden)]
+        #[allow(unsafe_attr_outside_unsafe)]
         #[no_mangle]
         pub extern "C" fn #extern_gauge_name(
             ctx: ::msfs::sys::FsContext,
@@ -136,6 +137,7 @@ pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
         }
 
         #[doc(hidden)]
+        #[allow(unsafe_attr_outside_safe)]
         #[no_mangle]
         pub extern "C" fn #extern_mouse_name(
             fx: std::os::raw::c_float,
