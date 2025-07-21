@@ -18,6 +18,7 @@ use syn::{
 /// }
 /// ```
 #[proc_macro_attribute]
+#[allow(unsafe_code)]
 pub fn standalone_module(_args: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemFn);
 
@@ -96,6 +97,7 @@ impl Parse for GaugeArgs {
 /// #[msfs::gauge(name=FOO)]
 /// async fn xyz(...) {}
 #[proc_macro_attribute]
+#[allow(unsafe_code)]
 pub fn gauge(args: TokenStream, item: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as GaugeArgs);
     let input = parse_macro_input!(item as ItemFn);
